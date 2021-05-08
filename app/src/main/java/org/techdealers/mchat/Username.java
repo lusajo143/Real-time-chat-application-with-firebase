@@ -7,27 +7,23 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Phone extends AppCompatActivity {
+public class Username extends AppCompatActivity {
 
     private EditText Username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phone);
+        setContentView(R.layout.activity_username);
 
         Username = findViewById(R.id.username);
-
-        if (!new dbHelper(this).getPhone().equals("null")) {
-            startActivity(new Intent(this, MainActivity.class));
-        }
 
     }
 
 
     public void add(View view) {
         if (Username.getText().toString().equals("")) {
-            Username.setError("Enter phone number");
+            Username.setError("Enter Username here");
         } else {
             new dbHelper(this)
                     .insert(Username.getText().toString());

@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
                     new dbHelper(this)
                             .logout();
                     startActivity(new Intent(MainActivity.this,
-                            Phone.class));
+                            Username.class));
                     finish();
                 }))
                 .setNegativeButton("No", ((dialog, which) -> {

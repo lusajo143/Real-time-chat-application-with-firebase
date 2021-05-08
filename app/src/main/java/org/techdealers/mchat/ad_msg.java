@@ -3,6 +3,7 @@ package org.techdealers.mchat;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,14 +69,9 @@ public class ad_msg extends RecyclerView.Adapter<ad_msg.ViewHolder> {
                             .load(item.getImage())
                             .into(holder.image_right);
                     holder.image_right.setOnClickListener(v -> {
-                        AlertDialog alertDialog = new AlertDialog.Builder(context)
-                                .setView(R.layout.image)
-                                .create();
-                        alertDialog.show();
-                        ImageView imageView = alertDialog.findViewById(R.id.full_image);
-                        Glide.with(context)
-                                .load(item.getImage())
-                                .into(imageView);
+                        Intent photo = new Intent(context, photo.class);
+                        photo.putExtra("img_url", item.getImage());
+                        context.startActivity(photo);
                     });
                     holder.image_right.setVisibility(View.VISIBLE);
                 }
@@ -144,14 +140,9 @@ public class ad_msg extends RecyclerView.Adapter<ad_msg.ViewHolder> {
                     holder.image_left.setVisibility(View.VISIBLE);
 
                     holder.image_left.setOnClickListener(v -> {
-                        AlertDialog alertDialog = new AlertDialog.Builder(context)
-                                .setView(R.layout.image)
-                                .create();
-                        alertDialog.show();
-                        ImageView imageView = alertDialog.findViewById(R.id.full_image);
-                        Glide.with(context)
-                                .load(item.getImage())
-                                .into(imageView);
+                        Intent photo = new Intent(context, photo.class);
+                        photo.putExtra("img_url", item.getImage());
+                        context.startActivity(photo);
                     });
 
                 }

@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PediaChat"
         android:usesCleartextTraffic="true">
+        <activity android:name=".photo"></activity>
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,8 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Username"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".Username" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

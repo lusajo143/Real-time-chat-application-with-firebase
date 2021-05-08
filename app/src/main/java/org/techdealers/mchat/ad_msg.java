@@ -3,6 +3,7 @@ package org.techdealers.mchat;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +45,7 @@ public class ad_msg extends RecyclerView.Adapter<ad_msg.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull ad_msg.ViewHolder holder, int position) {
         pojo_msg item = list.get(position);
@@ -64,6 +67,16 @@ public class ad_msg extends RecyclerView.Adapter<ad_msg.ViewHolder> {
                     Glide.with(context)
                             .load(item.getImage())
                             .into(holder.image_right);
+                    holder.image_right.setOnClickListener(v -> {
+                        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                .setView(R.layout.image)
+                                .create();
+                        alertDialog.show();
+                        ImageView imageView = alertDialog.findViewById(R.id.full_image);
+                        Glide.with(context)
+                                .load(item.getImage())
+                                .into(imageView);
+                    });
                     holder.image_right.setVisibility(View.VISIBLE);
                 }
 
@@ -129,6 +142,18 @@ public class ad_msg extends RecyclerView.Adapter<ad_msg.ViewHolder> {
                             .load(item.getImage())
                             .into(holder.image_left);
                     holder.image_left.setVisibility(View.VISIBLE);
+
+                    holder.image_left.setOnClickListener(v -> {
+                        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                .setView(R.layout.image)
+                                .create();
+                        alertDialog.show();
+                        ImageView imageView = alertDialog.findViewById(R.id.full_image);
+                        Glide.with(context)
+                                .load(item.getImage())
+                                .into(imageView);
+                    });
+
                 }
                 if (item.getMessage().equals("null")) {
                     holder.msg_left.setVisibility(View.GONE);

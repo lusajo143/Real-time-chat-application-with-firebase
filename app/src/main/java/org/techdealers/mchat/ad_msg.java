@@ -106,6 +106,12 @@ public class ad_msg extends RecyclerView.Adapter<ad_msg.ViewHolder> {
                 holder.msg_left.setVisibility(View.VISIBLE);
                 holder.time_left.setVisibility(View.GONE);
             } else {
+
+                // Setting time
+                @SuppressLint("SimpleDateFormat")
+                SimpleDateFormat format = new SimpleDateFormat("dd MMM HH:mm");
+                holder.time_left.setText(format.format(Long.valueOf(item.getTime())));
+
                 holder.msg_left.setText(item.getMessage());
                 if (item.getImage().equals("null")) {
                     holder.image_left.setVisibility(View.GONE);

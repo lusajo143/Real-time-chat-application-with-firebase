@@ -11,7 +11,7 @@ public class dbHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table if not exists user(phone varchar(255) not null)");
+        db.execSQL("create table if not exists user(username varchar(255) not null)");
     }
 
     @Override
@@ -19,9 +19,9 @@ public class dbHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insert(String phone){
+    public void insert(String username) {
         SQLiteDatabase database = getWritableDatabase();
-        database.execSQL("insert into user values ('"+phone+"');");
+        database.execSQL("insert into user values ('" + username + "');");
     }
 
     public String getPhone() {
@@ -36,7 +36,7 @@ public class dbHelper extends SQLiteOpenHelper {
     public void logout() {
         SQLiteDatabase database = getWritableDatabase();
         database.execSQL("drop table if exists user;");
-        database.execSQL("create table if not exists user(phone varchar(255) not null)");
+        database.execSQL("create table if not exists user(username varchar(255) not null)");
     }
 
 }

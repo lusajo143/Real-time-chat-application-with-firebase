@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingRight="10dp"
+    android:layout_marginTop="3dp"
     android:paddingLeft="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -10,7 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
-        android:paddingBottom="5dp"
         app:cardBackgroundColor="#f7f7f7"
         android:id="@+id/card_left"
         android:layout_alignParentLeft="true"
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/username_msg"
@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
                 android:text="Username"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/purple_500"
+                android:textSize="@dimen/text_size" />
 
             <ImageView
                 android:id="@+id/image_left"
@@ -43,15 +44,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Msg"
-                android:textColor="#AAFF00" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size" />
 
             <TextView
                 android:id="@+id/msg_time_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="time"
-                android:textColor="@android:color/black"
-                android:textSize="12dp" />
+                android:textColor="@color/teal_700"
+                android:textSize="@dimen/text_size" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -68,13 +70,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="5dp">
 
             <ImageView
                 android:id="@+id/image_right"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="2dp"
                 android:scaleType="centerCrop"
                 android:visibility="gone" />
 
@@ -82,6 +84,7 @@
                 android:id="@+id/message_txt_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
                 android:text="Msg" />
 
             <TextView
@@ -89,6 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="time"
+                android:textColor="@color/teal_700"
                 android:textSize="12dp" />
 
         </LinearLayout>

@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Jicho Progress Chat</string>
+    <string name="app_name">JP Chat</string>
     <dimen name="text_size">12dp</dimen>
 </resources>

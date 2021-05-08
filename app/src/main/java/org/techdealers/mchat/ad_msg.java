@@ -70,7 +70,12 @@ public class ad_msg extends RecyclerView.Adapter<ad_msg.ViewHolder> {
                 // Setting time
                 @SuppressLint("SimpleDateFormat")
                 SimpleDateFormat format = new SimpleDateFormat("dd MMM HH:mm");
-                holder.time_right.setText(format.format(Long.valueOf(item.getTime())));
+                try {
+                    holder.time_right.setText(format.format(Long.valueOf(item.getTime())));
+                } catch (Exception e) {
+                    holder.time_right.setVisibility(View.GONE);
+                }
+
 
                 holder.right.setOnLongClickListener(v -> {
                     AlertDialog delete = new AlertDialog.Builder(context)
@@ -110,7 +115,11 @@ public class ad_msg extends RecyclerView.Adapter<ad_msg.ViewHolder> {
                 // Setting time
                 @SuppressLint("SimpleDateFormat")
                 SimpleDateFormat format = new SimpleDateFormat("dd MMM HH:mm");
-                holder.time_left.setText(format.format(Long.valueOf(item.getTime())));
+                try {
+                    holder.time_left.setText(format.format(Long.valueOf(item.getTime())));
+                } catch (Exception e) {
+                    holder.time_left.setVisibility(View.GONE);
+                }
 
                 holder.msg_left.setText(item.getMessage());
                 if (item.getImage().equals("null")) {

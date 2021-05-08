@@ -45,52 +45,57 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="20dp">
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_height="match_parent">
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center"
-                    android:text="Enter username"
-                    android:textColor="@android:color/black"
-                    android:textSize="30dp" />
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:text="Your username must be unique\nNote: No authentication yet :)"
-                    android:textColor="@android:color/black"
-                    android:textSize="18dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="Enter username"
+                        android:textColor="@android:color/black"
+                        android:textSize="30dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="Your username must be unique\nNote: No authentication yet :)"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
 
 
-                <EditText
-                    android:id="@+id/username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:hint="Username"
-                    android:inputType="text"
-                    android:textColor="@android:color/black" />
+                    <EditText
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:hint="Username"
+                        android:inputType="text"
+                        android:textColor="@android:color/black" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="add"
-                    android:text="Done"
-                    android:textAllCaps="false"
-                    app:cornerRadius="20dp" />
-            </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="add"
+                        android:text="Done"
+                        android:textAllCaps="false"
+                        app:cornerRadius="20dp" />
+                </LinearLayout>
 
+            </ScrollView>
         </androidx.cardview.widget.CardView>
 
         <LinearLayout

@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView typing_status;
 
+    private boolean load = true;
+
     ValueEventListener listener = new ValueEventListener() {
         @SuppressLint("SetTextI18n")
         @Override
@@ -86,6 +88,14 @@ public class MainActivity extends AppCompatActivity {
                 list.add(new pojo_msg(phone, message, image, shot.getKey(), status, time));
             }
             adapter.notifyDataSetChanged();
+            if (load) {
+                load = false;
+                try {
+                    recyclerView.smoothScrollToPosition(list.size() - 1);
+                } catch (Exception ignored) {
+
+                }
+            }
         }
 
         @Override
@@ -232,7 +242,10 @@ public class MainActivity extends AppCompatActivity {
             img_list.clear();
             img_adapter.notifyDataSetChanged();
 
+
         }
+        // allow to scroll
+        load = true;
     }
 
 

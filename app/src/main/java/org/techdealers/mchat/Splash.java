@@ -14,7 +14,7 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler().postDelayed(() -> {
-            if (new dbHelper(this).getPhone().equals("null")) {
+            if (!new dbHelper(this).getPhone().equals("null")) {
                 startActivity(new Intent(Splash.this, MainActivity.class));
             } else {
                 startActivity(new Intent(Splash.this, Username.class));

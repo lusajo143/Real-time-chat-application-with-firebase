@@ -28,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
                 android:text="Username"
+                android:textStyle="bold"
                 android:textColor="@color/purple_500"
                 android:textSize="@dimen/text_size" />
 
@@ -39,13 +40,13 @@
                 android:scaleType="centerCrop"
                 android:visibility="gone" />
 
-            <TextView
+            <hani.momanii.supernova_emoji_library.Helper.EmojiconTextView
                 android:id="@+id/message_txt_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Msg"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size" />
+                />
 
             <TextView
                 android:id="@+id/msg_time_left"
@@ -80,11 +81,10 @@
                 android:scaleType="centerCrop"
                 android:visibility="gone" />
 
-            <TextView
+            <hani.momanii.supernova_emoji_library.Helper.EmojiconTextView
                 android:id="@+id/message_txt_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size"
                 android:text="Msg" />
 
             <TextView

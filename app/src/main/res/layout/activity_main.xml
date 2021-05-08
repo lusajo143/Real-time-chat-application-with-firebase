@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/root"
     tools:context=".MainActivity">
 
 
@@ -160,26 +161,46 @@
             android:layout_alignParentLeft="true"
             />
 
-        <EditText
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/emoji"
             android:layout_toEndOf="@id/attach"
+            android:layout_marginTop="5dp"
+            android:id="@+id/emoji"
+            android:layout_toRightOf="@id/attach" />
+
+        <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+            android:layout_toEndOf="@id/emoji"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Type here..."
+            android:textColor="@android:color/black"
             android:id="@+id/msg"
             android:layout_toStartOf="@id/send"
             android:layout_toLeftOf="@id/send"
             android:layout_marginRight="5dp"
-            android:layout_toRightOf="@id/attach" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/send"
+            android:layout_toRightOf="@id/emoji" />
+
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="Send"
-            android:textAllCaps="false"
-            app:cornerRadius="10dp"
+            android:backgroundTint="@android:color/white"
+            android:src="@drawable/send"
             android:onClick="send"
+            android:layout_alignParentRight="true"
+            android:id="@+id/send"
             />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/send"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:text="Send"-->
+<!--            android:textAllCaps="false"-->
+<!--            app:cornerRadius="10dp"-->
+<!--            android:onClick="send"-->
+<!--            />-->
     </RelativeLayout>
 
 </RelativeLayout>

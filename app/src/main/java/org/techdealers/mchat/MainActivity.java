@@ -8,7 +8,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,9 +34,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
+import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
+
 public class MainActivity extends AppCompatActivity {
 
-    private EditText msg;
+    private EmojiconEditText msg;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
@@ -57,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     private CardView image_card, video_card;
 
     private TextView typing_status;
+    private ImageView emoji;
+    private EmojIconActions actions;
+    private RelativeLayout root;
 
     private boolean load = true;
 
@@ -116,6 +124,11 @@ public class MainActivity extends AppCompatActivity {
         image_card = findViewById(R.id.card_image);
         video_card = findViewById(R.id.card_video);
         loading = findViewById(R.id.loading_view);
+        emoji = findViewById(R.id.emoji);
+        root = findViewById(R.id.root);
+
+        actions = new EmojIconActions(this, root, msg, emoji);
+        actions.ShowEmojIcon();
 
         typing_status = findViewById(R.id.typing_status);
 

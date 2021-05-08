@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "642915355477",
+    "project_id": "pedia-chat",
+    "storage_bucket": "pedia-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642915355477:android:b191dc64f1570c4c583ddc",
+        "android_client_info": {
+          "package_name": "org.techdealers.mchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642915355477-2b947u9a3ngjpr97c2sn18dmper8ehv4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9JtWqGS6Ovnsu2yQqF-RceiaLSgxHBjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642915355477-2b947u9a3ngjpr97c2sn18dmper8ehv4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

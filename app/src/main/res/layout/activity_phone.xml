@@ -17,8 +17,8 @@
             android:id="@+id/phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone number"
-            android:inputType="phone" />
+            android:hint="Username"
+            android:inputType="text" />
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"

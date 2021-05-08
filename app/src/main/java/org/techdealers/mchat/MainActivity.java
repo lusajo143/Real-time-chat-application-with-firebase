@@ -1,39 +1,30 @@
 package org.techdealers.mchat;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCanceledListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,6 +54,42 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout choose;
     private CardView image_card, video_card;
 
+    ValueEventListener listener = new ValueEventListener() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            list.clear();
+            for (DataSnapshot shot : snapshot.getChildren()) {
+                String phone = "";
+                String message = "";
+                String image = "";
+                String status = "";
+                String time = "";
+
+                for (DataSnapshot head : shot.getChildren()) {
+                    if (head.getKey().equals("phone")) {
+                        phone = head.getValue().toString();
+                    } else if (head.getKey().equals("message")) {
+                        message = head.getValue().toString();
+                    } else if (head.getKey().equals("image")) {
+                        image = head.getValue().toString();
+                    } else if (head.getKey().equals("status")) {
+                        status = head.getValue().toString();
+                    } else if (head.getKey().equals("time")) {
+                        time = head.getValue().toString();
+                    }
+                }
+                list.add(new pojo_msg(phone, message, image, shot.getKey(), status, time));
+            }
+            adapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+        }
+    };
+    private LottieAnimationView loading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         choose = findViewById(R.id.choose);
         image_card = findViewById(R.id.card_image);
         video_card = findViewById(R.id.card_video);
+        loading = findViewById(R.id.loading_view);
 
 
         recyclerView.setHasFixedSize(true);
@@ -109,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
                 DatabaseReference reference = ref.child(new dbHelper(MainActivity.this).getPhone());
                 if (count == 0) {
                     reference.setValue("Not typing");
-                    Toast.makeText(MainActivity.this, "Zero", Toast.LENGTH_SHORT).show();
                 } else {
                     reference.setValue("Typing");
                 }
@@ -130,82 +157,50 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    ValueEventListener listener = new ValueEventListener() {
-        @SuppressLint("SetTextI18n")
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            list.clear();
-            for (DataSnapshot shot: snapshot.getChildren()) {
-                String phone = "";
-                String message = "";
-                for (DataSnapshot head: shot.getChildren()) {
-                    if (head.getKey().equals("phone")) {
-                        phone = head.getValue().toString();
-                    } else if (head.getKey().equals("message")){
-                        message = head.getValue().toString();
-                    }
-                }
-                list.add(new pojo_msg(phone, message));
-            }
-            adapter.notifyDataSetChanged();
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-        }
-    };
-
-    public void send(View view){
+    public void send(View view) {
         // Write a message to the database
-        DatabaseReference ref = myRef.push();
-        String text = "null";
+        final String[] text = {"null"};
         if (!msg.getText().toString().equals("")) {
-            text = msg.getText().toString();
+            text[0] = msg.getText().toString();
         }
-        if (uri == null) {
+        if (img_list.size() == 0) {
+            DatabaseReference ref = myRef.push();
             ref.child("phone").setValue(new dbHelper(MainActivity.this).getPhone());
-            ref.child("message").setValue(text);
+            ref.child("message").setValue(text[0]);
+            ref.child("status").setValue("Available");
             ref.child("image").setValue("null");
+            ref.child("time").setValue(new Date().getTime() + "");
             msg.setText("");
         } else {
-            AlertDialog uploading = new AlertDialog.Builder(MainActivity.this)
-                    .setCancelable(true)
-                    .setTitle("Uploading")
-                    .create();
-            uploading.show();
-            StorageReference file = storageReference.child(String.valueOf(new Date().getTime()));
+            loading.setVisibility(View.VISIBLE);
+            recyclerView_image.setVisibility(View.GONE);
 
-            file.putFile(uri)
-                    .addOnSuccessListener(taskSnapshot -> {
-                        uploading.dismiss();
-                        file.getDownloadUrl().addOnSuccessListener(uri -> {
-                            Log.d("TAG", "send: "+uri);
+            for (int i = 0; i < img_list.size(); i++) {
+                StorageReference file = storageReference.child(String.valueOf(new Date().getTime()));
+                file.putFile(img_list.get(i).getUri())
+                        .addOnSuccessListener(taskSnapshot -> {
+                            loading.setVisibility(View.GONE);
+                            DatabaseReference ref = myRef.push();
+                            ref.child("phone").setValue(new dbHelper(MainActivity.this).getPhone());
+                            ref.child("message").setValue(text[0]);
+                            ref.child("status").setValue("Available");
+                            ref.child("time").setValue(new Date().getTime() + "");
+                            text[0] = "null";
+                            file.getDownloadUrl().addOnSuccessListener(uri -> {
+                                ref.child("image").setValue(uri.toString());
+                            });
+                        })
+                        .addOnCanceledListener(() -> {
+                            recyclerView_image.setVisibility(View.VISIBLE);
+                            loading.setVisibility(View.GONE);
                         });
-                    })
-                    .addOnCanceledListener(uploading::dismiss)
-                    .addOnProgressListener(snapshot -> {
-                        double progress
-                                = (100.0
-                                * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                        uploading.setMessage("Uploaded " + (int)progress + "%");
-                        Log.d("TAG", "send: "+(int)progress);
-                    });
+            }
+
+            msg.setText("");
+            img_list.clear();
+            img_adapter.notifyDataSetChanged();
+
         }
-//        if (msg.getText().toString().equals("")) {
-//            msg.setError("Enter your message here");
-//        } else {
-//            // Write a message to the database
-//            DatabaseReference ref = myRef.push();
-//            String text = "null";
-//            if (!msg.getText().toString().equals("")) {
-//                text = msg.getText().toString();
-//            }
-//            if (uri == null) {
-//                ref.child("phone").setValue(new dbHelper(MainActivity.this).getPhone());
-//                ref.child("message").setValue(text);
-//                msg.setText("");
-//            }
-//        }
     }
 
 

@@ -24,7 +24,7 @@ public class dbHelper extends SQLiteOpenHelper {
         database.execSQL("insert into user values ('"+phone+"');");
     }
 
-    public String getPhone(){
+    public String getPhone() {
         SQLiteDatabase database = getReadableDatabase();
         Cursor cursor = database.rawQuery("select * from user;", null);
         if (cursor.moveToFirst()) {
@@ -32,4 +32,11 @@ public class dbHelper extends SQLiteOpenHelper {
         }
         return "null";
     }
+
+    public void logout() {
+        SQLiteDatabase database = getWritableDatabase();
+        database.execSQL("drop table if exists user;");
+        database.execSQL("create table if not exists user(phone varchar(255) not null)");
+    }
+
 }

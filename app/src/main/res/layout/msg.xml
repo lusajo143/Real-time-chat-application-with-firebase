@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@android:color/holo_green_dark"
+        app:cardBackgroundColor="#FF9F81"
         android:id="@+id/card_right"
         android:layout_marginBottom="5dp"
         android:layout_alignParentRight="true">
@@ -82,15 +82,13 @@
                 android:id="@+id/message_txt_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Msg"
-                android:textColor="#AAFF00" />
+                android:text="Msg" />
 
             <TextView
                 android:id="@+id/msg_time_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="time"
-                android:textColor="@android:color/black"
                 android:textSize="12dp" />
 
         </LinearLayout>
